@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
+import './styles/main.css';
+import {Main} from './components/main.js'
 
-function App() {
+const App = () => {
     return(
-        <div>123</div>
-    )
-}
+        <Main />
+    );
+};
 
-export default App
+export default App;
