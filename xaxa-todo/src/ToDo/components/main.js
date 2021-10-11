@@ -4,6 +4,7 @@ import {Logo} from './logo'
 import {Form} from './form';
 import {Todos} from './todos';
 
+
 export class Main extends React.Component {
     state = {
         todos: []
@@ -25,13 +26,21 @@ export class Main extends React.Component {
         })
     }
 
+    reorderTodos = (result) => {
+        let newTodos = [...this.state.todos];
+        [newTodos[result.destination.index], newTodos[result.source.index]] = [newTodos[result.source.index], newTodos[result.destination.index]];
+        this.setState({
+            todos: newTodos
+        })
+    }
+
     render() {
         const { todos } = this.state
         return (
             <div className="container">
                 <Logo />
                 <Form addTodos={this.addTodos} />
-                <Todos todos={ todos } removeTodos={this.removeTodos}/>
+                <Todos todos={todos} hDrop={this.hDrop} reorderTodos={this.reorderTodos} removeTodos={this.removeTodos} />
             </div>
         );
     }
