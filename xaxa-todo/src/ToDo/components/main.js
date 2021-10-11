@@ -13,6 +13,7 @@ export class Main extends React.Component {
     addTodos = (todoValue) => {
         let newTodos = [...this.state.todos];
         newTodos.push(todoValue);
+
         this.setState({
             todos: newTodos
         })
@@ -21,16 +22,21 @@ export class Main extends React.Component {
     removeTodos = (index) => {
         let newTodos = [...this.state.todos];
         newTodos.splice(index, 1);
+
         this.setState({
             todos: newTodos
         })
     }
 
     reorderTodos = (result) => {
-        let newTodos = [...this.state.todos];
-        [newTodos[result.destination.index], newTodos[result.source.index]] = [newTodos[result.source.index], newTodos[result.destination.index]];
+        const srcIndex = result.source.index
+        const dstIndex = result.destination.index
+
+        const [tempTodo] = this.state.todos.splice(srcIndex, 1)
+        this.state.todos.splice(dstIndex, 0, tempTodo)
+
         this.setState({
-            todos: newTodos
+            todos: [...this.state.todos]
         })
     }
 

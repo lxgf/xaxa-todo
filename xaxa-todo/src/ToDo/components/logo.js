@@ -3,5 +3,5 @@ import '../styles/logo.css';
 
 
 export const Logo = () => (
-    <div className="logo">Notes</div>
+    <div className="logo">Todos</div>
 )
