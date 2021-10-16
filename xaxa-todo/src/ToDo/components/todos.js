@@ -43,7 +43,7 @@ export class Todos extends React.Component {
                                     </Draggable>
                                 )
                             })}
-                        {provided.placeholder}
+                        <span style={{ display: 'none' }}>{provided.placeholder}</span>
                         </ul>
                     )}
                 </Droppable>

@@ -1,11 +1,10 @@
-import React, {createContext} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './ToDo/App';
 import firebase from "firebase/compat";
 import 'firebase/firestore';
 import 'firebase/auth';
-
 
 firebase.initializeApp({
     apiKey: "AIzaSyBdXi7qAucBHcqNJ8sb73ayHstruw8w94w",
@@ -18,18 +17,4 @@ firebase.initializeApp({
     measurementId: "G-G21E1J5GFF"
 })
 
-export const Context = createContext(null)
-
-const auth = firebase.auth();
-const firestore = firebase.firestore();
-
-ReactDOM.render(
-    <Context.Provider value={{
-        firebase,
-        auth,
-        firestore
-    }}>
-        <App />
-    </Context.Provider>,
-    document.getElementById('root')
-);
+ReactDOM.render(<App />, document.getElementById('root'));

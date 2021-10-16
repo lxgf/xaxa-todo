@@ -1,39 +1,70 @@
-import React, {useContext, useState} from 'react';
+import React from 'react';
 import '../styles/main.css';
-import {Header} from './header'
+import {Logo} from './logo'
 import {Form} from './form';
 import {Todos} from './todos';
-import Api from './api'
 import firebase from "firebase/compat";
-import {Context} from "../../index";
-import {useAuthState} from "react-firebase-hooks/auth";
-
-const db = firebase.firestore();
-
-const {auth} = useContext(Context);
-const [user] = useAuthState(auth);
+import { doc, onSnapshot } from "firebase/firestore";
 
 export class Main extends React.Component {
     state = {
         todos: []
     }
 
-    addTodos = (todoValue) => {
+    db = firebase.firestore();
+    docRef = this.db.collection('todos').doc('all_todos');
+
+    loadAllDataFromDb = () => {
+        this.docRef.get().then(async (doc) => {
+            if (doc.exists) {
+                const rcvTodos = doc.data().todos;
+                await this.setState({
+                    todos: rcvTodos
+                })
+            } else this.docRef.set({
+                todos: ''
+            }).then(() => console.log('Документ успешно создан'));
+        }).catch((error) => {
+            console.log("Ошибка получения документа:", error);
+        });
+    }
+
+    snapUpdate = () => {
+        const upd = onSnapshot(doc(this.db, "todos", "all_todos"), async(doc) => {
+            const source = doc.metadata.hasPendingWrites ? "Local" : "Server";
+            const rcvTodos = doc.data().todos;
+            await this.setState({
+                todos: rcvTodos
+            })
+        });
+    }
+
+    sendToDb = async () => {
+        await this.docRef.update({
+            todos: this.state.todos
+        });
+    }
+
+    addTodos = async (todoValue) => {
         let newTodos = [...this.state.todos];
         newTodos.push(todoValue);
 
-        this.setState({
+        await this.setState({
             todos: newTodos
         })
+
+        await this.sendToDb();
     }
 
-    removeTodos = (index) => {
+    removeTodos = async (index) => {
         let newTodos = [...this.state.todos];
         newTodos.splice(index, 1);
 
-        this.setState({
+        await this.setState({
             todos: newTodos
         })
+
+        await this.sendToDb();
     }
 
     reorderTodos = async (result) => {
@@ -44,28 +75,29 @@ export class Main extends React.Component {
             const [tempTodo] = this.state.todos.splice(srcIndex, 1);
             this.state.todos.splice(dstIndex, 0, tempTodo);
 
-            this.setState({
+            await this.setState({
                 todos: [...this.state.todos]
             })
+
+            await this.sendToDb();
         }
     }
 
-
-    getTodos = (receivedTodos) => {
-        this.setState({
-            todos: receivedTodos
-        })
-    }
 
     render() {
         const {todos} = this.state
         return (
             <div className="container">
-                <Api todos={todos} sendTodos={todos} getTodos={this.getTodos} />
-                <Header />
+                <Logo />
                 <Form addTodos={this.addTodos} />
                 <Todos todos={todos} reorderTodos={this.reorderTodos} removeTodos={this.removeTodos} />
             </div>
         );
+    }
+
+
+    componentDidMount() {
+        this.loadAllDataFromDb();
+        this.snapUpdate();
     }
 }
