@@ -34,6 +34,7 @@ export class Todos extends React.Component {
                                     <Draggable key={index} draggableId={'todo-'+index} index={index}>
                                         {provided => (
                                             <li
+                                            data-testid="todos_list"
                                             {...provided.draggableProps}
                                             {...provided.dragHandleProps}
                                             ref={provided.innerRef}
@@ -44,8 +45,7 @@ export class Todos extends React.Component {
                             })}
                         {provided.placeholder}
                         </ul>
-                    )
-                    }
+                    )}
                 </Droppable>
             </DragDropContext>
         );

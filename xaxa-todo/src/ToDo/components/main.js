@@ -1,9 +1,17 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import '../styles/main.css';
-import {Logo} from './logo'
+import {Header} from './header'
 import {Form} from './form';
 import {Todos} from './todos';
+import Api from './api'
+import firebase from "firebase/compat";
+import {Context} from "../../index";
+import {useAuthState} from "react-firebase-hooks/auth";
 
+const db = firebase.firestore();
+
+const {auth} = useContext(Context);
+const [user] = useAuthState(auth);
 
 export class Main extends React.Component {
     state = {
@@ -28,25 +36,35 @@ export class Main extends React.Component {
         })
     }
 
-    reorderTodos = (result) => {
-        const srcIndex = result.source.index
-        const dstIndex = result.destination.index
+    reorderTodos = async (result) => {
+        if(result.destination !== null) {
+            const dstIndex = result.destination.index;
+            const srcIndex = result.source.index;
 
-        const [tempTodo] = this.state.todos.splice(srcIndex, 1)
-        this.state.todos.splice(dstIndex, 0, tempTodo)
+            const [tempTodo] = this.state.todos.splice(srcIndex, 1);
+            this.state.todos.splice(dstIndex, 0, tempTodo);
 
+            this.setState({
+                todos: [...this.state.todos]
+            })
+        }
+    }
+
+
+    getTodos = (receivedTodos) => {
         this.setState({
-            todos: [...this.state.todos]
+            todos: receivedTodos
         })
     }
 
     render() {
-        const { todos } = this.state
+        const {todos} = this.state
         return (
             <div className="container">
-                <Logo />
+                <Api todos={todos} sendTodos={todos} getTodos={this.getTodos} />
+                <Header />
                 <Form addTodos={this.addTodos} />
-                <Todos todos={todos} hDrop={this.hDrop} reorderTodos={this.reorderTodos} removeTodos={this.removeTodos} />
+                <Todos todos={todos} reorderTodos={this.reorderTodos} removeTodos={this.removeTodos} />
             </div>
         );
     }
