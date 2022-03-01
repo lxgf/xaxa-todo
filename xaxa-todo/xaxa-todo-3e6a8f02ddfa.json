@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "xaxa-todo",
+  "private_key_id": "3e6a8f02ddfa0f7ec0dfcd75414d7a48a39c3092",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDglkS90wZjP2n6\nbXjjWSXFD6xQlR6gAcpWkyaOLvVJQ5dwdzRVk/ZiU18GaJiChvMIZNhIJbyU3eJf\nJqXobNM+K5UvBQtMJG1f802Rh1930s1vnrWob8gKx7JMgFMwfOPkyCCM2HLQMla7\nk5AaaJjPrYZT6RqwjDUvEnhBf9e24GyTQm1nEhXIOnQZAm1OimFDf66uuFKe7ZYX\nRKFbOnzwxiHFLlJR6A2iLf8XHt1lfxOorNylinDAx1BnMAJmSNJztwKvL05AvAIC\nenFegcIoNXaWq4ZfiQOro261/n1PbAv1vVg7MUS3fzsyNjIu7h88cTN67uxCA0Ga\nhlMrrEEjAgMBAAECggEATSsE4q6cLsTuzrgHxiJvCmeIv0WFuNf0pMu5/zfeWzao\n1eF3r4IAMifQalzNLmhdIIC6GgwxYHtfGW+nqRWffeiuwXG7wIVxuXrZp8v6fysF\nILnJVF9YPnAAcS3Up7/59DXZjVugE66AQ8J/zLss6osGsVVSsN/0NEDl5iedwL12\ndnIh03M2rgMyUZvt/r/pAvIa8CJEBRbFQKcdxab7Nv4VrmsK6LibJQ0GcGHp+AoY\nWbCFNO3esAZXxOkQbVOQM6XKTdukHzuSikYCPzJJwNg5qe8nicOeBYdXPTRm/Pfa\nG+Pqpx0y60/v+n/iRGle6DPypAAgnG5HH+u0u56iyQKBgQDyyA/HlivmTDbNm8pn\n92W3lBJavG7n8XNPrGx+7AdRgGfmq/AnO6J9C7N4Kh4An9fnoQxl366Vu2Me0HyM\n0Zzsk6keLAJ/MVgaXZttxlxgZqdk+LoelY7x/lJNf24GEr1OHEZgYXMw6G34x3fr\nFNL72GV5YkegXGI1UqmAgZeXyQKBgQDs0Juu6OoeE6i+nu9NL9UO4JaovxwGyO9N\nsavMaX7oXZEl6GbKKCGhdmOo2aliTmLWbY7AzIrmTjBT3JLChgX7J45ctBUoM4/4\nsswC8DSa0YLDR+53jV615HA1PmmhB2Oim6Mg2yvBAbuCfu9nQ/3N16/n6WLeXf/R\n/KDUd9+fiwKBgGKRt1ZhMhGef+GajuMHHtUZ2Rndx2mELjz61FHzokUEzSpqRGap\nX59FUOhIsUWvoAj66f2ygz9nhSbNnsPNlti2WsNVOu5JKmwJ9UDseDTreKsWEPq5\n3f+CMggk5JaypQlBkZEv/4Sr2XpYAef/3GlDwm81577Dw1vC4+64rsOBAoGBAL1z\nIajrAihvl8ZvhYedZXgSadSzlqtC4laodYUBPJqOCAlog5rkQgtWl+HDx4MyrFVY\nriRFPjWChZ0BT5M4/t3uxjAZjPdtUJcoCperLJpSU6cAC6Euwn8HMlEWDhDZxXaX\nxggJ7lXomeaKv+E//nJHQ51nE0ZLstV9ofh3sbmDAoGAEp+N6i1Jeugc5cLPqhp6\nKdEjpKsP8/HHLLJ5Ncro91Ow38LoUTLmqEF9Jd73xP5ZJ/UZ4rg+07MDyIi3vHQj\nEnwsrfMOiONV6iIxqulkoVeM9znz5MDYp8dt4xAfY3zdnfZr9eZZGbdjxez3YCSs\nBSSwKzlZ2KUQvGCni24aLyI=\n-----END PRIVATE KEY-----\n",
+  "client_email": "xaxa-todo@appspot.gserviceaccount.com",
+  "client_id": "105020174479224571435",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/xaxa-todo%40appspot.gserviceaccount.com"
+}

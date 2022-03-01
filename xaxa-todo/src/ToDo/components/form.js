@@ -48,7 +48,7 @@ export class Form extends React.Component {
     render() {
         return (
             <div>
-                <input type="text" className="form" style={{borderColor: this.state.borderColor}} value={this.state.formValue} onKeyPress={this.handleInputPress} onInput={this.handleInputChange} placeholder="Введите текст для добавления" />
+                <input type="text" aria-label="todo-input" className="form" style={{borderColor: this.state.borderColor}} value={this.state.formValue} onKeyPress={this.handleInputPress} onInput={this.handleInputChange} placeholder="Введите текст для добавления" />
             </div>
         );
     }

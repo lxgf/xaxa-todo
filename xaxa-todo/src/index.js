@@ -4,7 +4,6 @@ import './index.css';
 import App from './ToDo/App';
 import firebase from "firebase/compat";
 import 'firebase/firestore';
-import 'firebase/auth';
 
 firebase.initializeApp({
     apiKey: "AIzaSyBdXi7qAucBHcqNJ8sb73ayHstruw8w94w",
@@ -17,4 +16,4 @@ firebase.initializeApp({
     measurementId: "G-G21E1J5GFF"
 })
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App db={firebase.firestore()} />, document.getElementById('root'));

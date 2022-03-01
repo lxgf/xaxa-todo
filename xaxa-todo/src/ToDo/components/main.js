@@ -5,23 +5,24 @@ import {Form} from './form';
 import {Todos} from './todos';
 import firebase from "firebase/compat";
 import { doc, onSnapshot } from "firebase/firestore";
+import App from "../App";
 
 export class Main extends React.Component {
     state = {
-        todos: []
+        todos: [],
+        loading: true
     }
 
-    db = firebase.firestore();
-    docRef = this.db.collection('todos').doc('all_todos');
 
-    loadAllDataFromDb = () => {
-        this.docRef.get().then(async (doc) => {
+    loadAllDataFromDb = async () => {
+        return this.props.db.collection('todos').doc('all_todos').get().then((doc) => {
             if (doc.exists) {
                 const rcvTodos = doc.data().todos;
-                await this.setState({
-                    todos: rcvTodos
+                this.setState({
+                    todos: rcvTodos,
+                    loading: false
                 })
-            } else this.docRef.set({
+            } else this.db.collection('todos').doc('all_todos').set({
                 todos: ''
             }).then(() => console.log('Документ успешно создан'));
         }).catch((error) => {
@@ -30,17 +31,17 @@ export class Main extends React.Component {
     }
 
     snapUpdate = () => {
-        const upd = onSnapshot(doc(this.db, "todos", "all_todos"), async(doc) => {
+        const upd = this.props.db.collection('todos').doc('all_todos').onSnapshot((doc) => {
             const source = doc.metadata.hasPendingWrites ? "Local" : "Server";
             const rcvTodos = doc.data().todos;
-            await this.setState({
+            this.setState({
                 todos: rcvTodos
             })
         });
     }
 
     sendToDb = async () => {
-        await this.docRef.update({
+        await this.props.db.collection('todos').doc('all_todos').update({
             todos: this.state.todos
         });
     }
@@ -85,19 +86,20 @@ export class Main extends React.Component {
 
 
     render() {
-        const {todos} = this.state
+        const {todos, loading} = this.state
         return (
             <div className="container">
                 <Logo />
                 <Form addTodos={this.addTodos} />
-                <Todos todos={todos} reorderTodos={this.reorderTodos} removeTodos={this.removeTodos} />
+                {!loading && <Todos todos={todos} reorderTodos={this.reorderTodos} removeTodos={this.removeTodos} />}
+                {loading && <div className="notifier">Загрузка...</div>}
             </div>
         );
     }
 
 
-    componentDidMount() {
-        this.loadAllDataFromDb();
+    async componentDidMount() {
+        await this.loadAllDataFromDb();
         this.snapUpdate();
     }
 }
